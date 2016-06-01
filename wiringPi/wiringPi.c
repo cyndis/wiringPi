@@ -1086,6 +1086,17 @@ void pwmSetMode (int mode)
   }
 }
 
+void pwmSetRevertPolarity (int reversed)
+{
+  if ((wiringPiMode == WPI_MODE_PINS) || (wiringPiMode == WPI_MODE_PHYS) || (wiringPiMode == WPI_MODE_GPIO))
+  {
+    if (reversed)
+      *(pwm + PWM_CONTROL) |= PWM0_REVPOLAR | PWM1_REVPOLAR ;
+    else
+      *(pwm + PWM_CONTROL) &= ~(PWM0_REVPOLAR | PWM1_REVPOLAR) ;
+  }
+}
+
 
 /*
  * pwmSetRange:
